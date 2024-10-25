@@ -1,0 +1,66 @@
+# Node modules directory
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Directory for storing temporary files
+tmp/
+temp/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional npm cache and lock files
+package-lock.json
+yarn.lock
+
+# Coverage directory for testing
+coverage/
+
+# IDE / Editor specific files
+.vscode/
+.idea/
+
+# MongoDB data dumps
+dump/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm logs and lock files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Process-specific files
+pids/
+*.pid
+*.pid.lock
+
+# Runtime data
+*.seed
+*.pid
+
+# Binaries
+bin/
+build/
+dist/
+
+# Git directory configurations
+.git/
+
+# Temporary files created by code formatting tools or OS
+*.swp
+*.swo
+*.swn
+*.bak
