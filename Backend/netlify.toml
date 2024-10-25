@@ -1,4 +1,7 @@
-[build]
-    functions = "functions"
-    node_builder = "esbuild"
-    
+[functions]
+  functions="netlify/functions"
+[[redirects]]
+  force = true
+  from = "/api/*"
+  status = 200
+  to = "/.netlify/functions/api/:splat"

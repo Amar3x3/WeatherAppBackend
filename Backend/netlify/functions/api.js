@@ -1,11 +1,13 @@
-// index.js
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios');
-const HourlyWeather = require('../models/HourlyWeather');
-const DailyWeatherSummary = require('../models/DailyWeatherSummary');
+const HourlyWeather = require('../../models/HourlyWeather');
+const DailyWeatherSummary = require('../../models/DailyWeatherSummary');
 import ServerlessHttp from 'serverless-http';
+import { Router } from 'express';
+const router = Router();
 
 const app = express();
 const port = 3000;
@@ -109,18 +111,18 @@ const computeDailySummary = async () => {
 setInterval(computeDailySummary, 24 * 60 * 60 * 1000); // 24 hours
 
 // Define API Endpoints
-app.get('/.netlify/functions/hello', async (req, res)=>{
+router.get('/hello', async (req, res)=>{
     return res.json({
         "msg":"hello"
     })
 })
-app.get('/.netlify/functions/current-weather', async (req, res) => {
+router.get('/current-weather', async (req, res) => {
     const { city } = req.query;
     const latestWeather = await HourlyWeather.findOne({ city }).sort({ dt: -1 });
     res.json(latestWeather);
 });
 
-app.get('/.netlify/functions/weather-history', async (req, res) => {
+router.get('/weather-history', async (req, res) => {
     const { city, date } = req.query;
     const dateObj = new Date(date);
     const hourlyData = await HourlyWeather.find({
@@ -134,12 +136,7 @@ app.get('/.netlify/functions/weather-history', async (req, res) => {
 
 
 
-app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
+// app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
+app.use('/api/',router);
 
-
-const handler = ServerlessHttp(app);
-
-module.exports.handler  = async(e, c) =>{
-    const result = await handler(e, c);
-    return result;
-}
+export const handler = ServerlessHttp(app);

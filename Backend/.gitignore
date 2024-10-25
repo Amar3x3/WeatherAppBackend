@@ -1,5 +1,7 @@
 # Node modules directory
+
 node_modules/
+.netlify
 
 # Logs
 logs/
